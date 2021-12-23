@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const port = process.env.PORT || 3000;
+// const port = 8080;
+const port = 80;
 var cors = require("cors");
 
 app.use(express.json()); //Used to parse JSON bodies
@@ -34,6 +35,10 @@ var knex = require("knex")({
       encrypt: true, // mandatory for microsoft azure sql server
     },
   },
+});
+
+app.get("/api", (req, res) => {
+  res.send("OK");
 });
 
 app.get("/api/employee/", async (req, res) => {

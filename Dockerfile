@@ -1,11 +1,10 @@
 # build stage
-FROM node:lts-alpine as build-stage
+FROM node:14 as build-stage
 WORKDIR /app/front-end
 COPY ./front-end/package*.json ./
 RUN npm install
 COPY ./front-end .
 RUN npm run build --prod
-
 
 # production stage
 FROM node:lts-alpine as production-stage
@@ -15,7 +14,4 @@ COPY ./back-end/package*.json ./
 RUN npm install
 COPY ./back-end . 
 
-EXPOSE 3000
-CMD [ "node", "server.js" ]
-
-
+CMD [ "node", "start" ]
